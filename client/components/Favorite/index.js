@@ -38,6 +38,7 @@ export default function Home({ fav, id }) {
                 width={35}
                 height={35}
                 onClick={() => updateUser(id)}
+                alt='heart'
             />
         </FavImg>
     );

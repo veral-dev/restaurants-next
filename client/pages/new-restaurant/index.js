@@ -238,7 +238,7 @@ export default function NewRestaurant() {
                         </Hours>
                         <ul>
                             {operating_hours.length > 0 &&
-                                operating_hours.map((hour) => <li>{hour}</li>)}
+                                operating_hours.map((hour) => <li key={hour}>{hour}</li>)}
                         </ul>
                         <FieldForm>
                             <button

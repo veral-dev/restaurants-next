@@ -130,7 +130,7 @@ export default function Home() {
                                             id={restaurant._id}
                                         />
                                         <Link
-                                            href={`restaurant/${restaurant._id}`}
+                                            href={`restaurant/${restaurant._id}`} passHref
                                         >
                                             <a>
                                                 <Image
@@ -149,7 +149,7 @@ export default function Home() {
                         )}
                     </Cards>
                     {auth && (
-                        <Link href={`new-restaurant`}>
+                        <Link href={`new-restaurant`} passHref>
                             <button
                                 className="btn btn-primary"
                                 style={{ marginLeft: '4rem ' }}
