@@ -15,7 +15,6 @@ export type RestaurantType = {
         rating: number;
         comments: string;
     }>;
-    author: string;
 };
 
 export const RestaurantSchema = new mongoose.Schema<RestaurantType>(
@@ -44,12 +43,9 @@ export const RestaurantSchema = new mongoose.Schema<RestaurantType>(
             type: String,
         },
         operating_hours: {
-            type: String,
+            type: Map,
         },
         reviews: [{ type: Map }],
-        author: {
-            type: String,
-        },
     },
     {
         timestamps: true,

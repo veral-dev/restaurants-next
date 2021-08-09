@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import styled from 'styled-components';
 import Router from 'next/router';
@@ -25,7 +25,6 @@ const Nav = styled.nav`
     }
 
     .logo {
-        height: 100px;
         margin-left: 0.5rem;
         display: flex;
         align-items: center;
@@ -52,10 +51,19 @@ const Footer = styled.footer`
 `;
 export default function AppLayout({ children }) {
     const authContext = useContext(AuthContext);
-    const { user, userAuth, LogOut, auth, token } = authContext;
+    const { userAuth, LogOut, token } = authContext;
+
+    const [isLoggedIn, setIsLoggedIn] = useState(null);
+    useEffect(() => {
+        setIsLoggedIn(token);
+        return () => {
+            setIsLoggedIn(null);
+        };
+    }, []);
 
     useEffect(() => {
         if (token) userAuth();
+        else setIsLoggedIn(null);
     }, [token]);
     return (
         <>
@@ -80,7 +88,7 @@ export default function AppLayout({ children }) {
                             />
                         </span>
                     </div>
-                    {auth ? (
+                    {isLoggedIn ? (
                         <>
                             <button
                                 className="btn btn-primary cerrar-sesion"

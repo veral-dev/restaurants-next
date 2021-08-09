@@ -74,14 +74,9 @@ const Cards = styled.div`
 
 export default function Home() {
     const authContext = useContext(AuthContext);
-    const { token, user } = authContext;
+    const { token, user, auth } = authContext;
     const alertContext = useContext(AlertContext);
     const { alert, showAlert } = alertContext;
-
-    // const [isLoggedIn, setIsLoggedIn] = useState(null);
-    // useEffect(() => {
-    //     setIsLoggedIn(token);
-    // }, []);
 
     const [restaurants, setRestaurants] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -104,7 +99,6 @@ export default function Home() {
     useEffect(() => {
         if (!token) {
             setRestaurants([]);
-            // setIsLoggedIn(null);
         }
     }, [token]);
     return (
@@ -114,7 +108,7 @@ export default function Home() {
                     <Alert type={`${alert.category}`}>{alert.msg}</Alert>
                 ) : null}
                 <div className="container">
-                    <h1>Welcome to our restaurant list</h1>
+                    <h1>Bienvenido a nuestra lista de restaurantes</h1>
                     {loading && <Spinner />}
 
                     <Cards>
@@ -154,6 +148,16 @@ export default function Home() {
                             ))
                         )}
                     </Cards>
+                    {auth && (
+                        <Link href={`new-restaurant`}>
+                            <button
+                                className="btn btn-primary"
+                                style={{ marginLeft: '4rem ' }}
+                            >
+                                Nuevo restaurante
+                            </button>
+                        </Link>
+                    )}
                 </div>
             </AppLayout>
         </div>

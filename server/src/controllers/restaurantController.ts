@@ -1,4 +1,6 @@
 import Restaurant from '../models/Restaurant.model';
+import User from '../models/User.model';
+
 import { validationResult } from 'express-validator';
 import { Request, Response } from 'express';
 
@@ -15,14 +17,11 @@ export async function restaurantCreate(
         //Crear un nuevo restaurante
         const restaurant = new Restaurant(req.body);
 
-        //Guardar el creador via JWT
-        if (req.user) restaurant.author = req.user.username;
-
         //Guardar el restaurante
-        restaurant.save();
-        res.json({ ok: 1 });
+        const resp = await restaurant.save();
+        res.json({ id: resp._id });
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             msg: `Hubo un error ${error}`,
         });
     }
@@ -33,12 +32,15 @@ export async function getRestaurants(
     res: Response
 ): Promise<any> {
     try {
-        const restaurants = await Restaurant.find().sort({
+        const restaurants = await Restaurant.find(
+            {},
+            { name: 1, image: 1 }
+        ).sort({
             createdAt: -1,
         });
         res.json(restaurants);
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             msg: `Hubo un error ${error}`,
         });
     }
@@ -52,7 +54,9 @@ export async function getOneRestaurant(
         const rest = await Restaurant.findOne({ _id: req.params.id });
         res.status(200).json(rest);
     } catch (error) {
-        res.status(500).send('Hubo un error al buscar el restaurante');
+        res.status(500).json({
+            msg: `Hubo un error ${error}`,
+        });
     }
 }
 
@@ -83,11 +87,6 @@ export async function updateRestaurant(
             return res.status(404).json({ msg: 'Restaurante no encontrado' });
         }
 
-        //Verifica el creador del restaurante
-        if (restaurant.author.toString() !== req.user.username) {
-            return res.status(401).json({ msg: 'No autorizado' });
-        }
-
         //Actualizar restaurante
         restaurant = await Restaurant.findByIdAndUpdate(
             { _id: req.params.id },
@@ -96,7 +95,7 @@ export async function updateRestaurant(
         );
         res.json({ restaurant });
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             msg: `Hubo un error ${error}`,
         });
     }
@@ -116,16 +115,21 @@ export async function deleteRestaurant(
             return res.status(404).json({ msg: 'Restaurante no encontrado' });
         }
 
-        // verificar el creador del restaurante
-        if (restaurant.author.toString() !== req.user.username) {
-            return res.status(401).json({ msg: 'No autorizado' });
-        }
-
         // Eliminar el restaurante
         await Restaurant.findOneAndRemove({ _id: req.params.id });
+
+        // Eliminar favorito de los usuarios si existen
+        const users = await User.find({ favourites: { $in: [req.params.id] } });
+        for (let i = 0; i < users.length; i++) {
+            const user = users[i];
+            const favourites = user.favourites.filter(
+                (elm) => elm !== req.params.id
+            );
+            await user.updateOne({ favourites: favourites });
+        }
         res.json({ msg: 'Restaurante eliminado ' });
     } catch (error) {
-        res.status(400).json({
+        res.status(500).json({
             msg: `Hubo un error ${error}`,
         });
     }

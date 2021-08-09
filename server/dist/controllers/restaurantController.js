@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteRestaurant = exports.updateRestaurant = exports.getOneRestaurant = exports.getRestaurants = exports.restaurantCreate = void 0;
 const Restaurant_model_1 = __importDefault(require("../models/Restaurant.model"));
+const User_model_1 = __importDefault(require("../models/User.model"));
 const express_validator_1 = require("express-validator");
 function restaurantCreate(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -24,15 +25,12 @@ function restaurantCreate(req, res) {
         try {
             //Crear un nuevo restaurante
             const restaurant = new Restaurant_model_1.default(req.body);
-            //Guardar el creador via JWT
-            if (req.user)
-                restaurant.author = req.user.username;
             //Guardar el restaurante
-            restaurant.save();
-            res.json({ ok: 1 });
+            const resp = yield restaurant.save();
+            res.json({ id: resp._id });
         }
         catch (error) {
-            res.status(400).json({
+            res.status(500).json({
                 msg: `Hubo un error ${error}`,
             });
         }
@@ -42,13 +40,13 @@ exports.restaurantCreate = restaurantCreate;
 function getRestaurants(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const restaurants = yield Restaurant_model_1.default.find().sort({
+            const restaurants = yield Restaurant_model_1.default.find({}, { name: 1, image: 1 }).sort({
                 createdAt: -1,
             });
             res.json(restaurants);
         }
         catch (error) {
-            res.status(400).json({
+            res.status(500).json({
                 msg: `Hubo un error ${error}`,
             });
         }
@@ -62,7 +60,9 @@ function getOneRestaurant(req, res) {
             res.status(200).json(rest);
         }
         catch (error) {
-            res.status(500).send('Hubo un error al buscar el restaurante');
+            res.status(500).json({
+                msg: `Hubo un error ${error}`,
+            });
         }
     });
 }
@@ -87,16 +87,12 @@ function updateRestaurant(req, res) {
             if (!restaurant) {
                 return res.status(404).json({ msg: 'Restaurante no encontrado' });
             }
-            //Verifica el creador del restaurante
-            if (restaurant.author.toString() !== req.user.username) {
-                return res.status(401).json({ msg: 'No autorizado' });
-            }
             //Actualizar restaurante
             restaurant = yield Restaurant_model_1.default.findByIdAndUpdate({ _id: req.params.id }, { $set: newRestaurant }, { new: true });
             res.json({ restaurant });
         }
         catch (error) {
-            res.status(400).json({
+            res.status(500).json({
                 msg: `Hubo un error ${error}`,
             });
         }
@@ -113,16 +109,19 @@ function deleteRestaurant(req, res) {
             if (!restaurant) {
                 return res.status(404).json({ msg: 'Restaurante no encontrado' });
             }
-            // verificar el creador del restaurante
-            if (restaurant.author.toString() !== req.user.username) {
-                return res.status(401).json({ msg: 'No autorizado' });
-            }
             // Eliminar el restaurante
             yield Restaurant_model_1.default.findOneAndRemove({ _id: req.params.id });
+            // Eliminar favorito de los usuarios si existen
+            const users = yield User_model_1.default.find({ favourites: { $in: [req.params.id] } });
+            for (let i = 0; i < users.length; i++) {
+                const user = users[i];
+                const favourites = user.favourites.filter((elm) => elm !== req.params.id);
+                yield user.updateOne({ favourites: favourites });
+            }
             res.json({ msg: 'Restaurante eliminado ' });
         }
         catch (error) {
-            res.status(400).json({
+            res.status(500).json({
                 msg: `Hubo un error ${error}`,
             });
         }

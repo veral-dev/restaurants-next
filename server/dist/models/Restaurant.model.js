@@ -30,12 +30,9 @@ exports.RestaurantSchema = new mongoose_1.default.Schema({
         type: String,
     },
     operating_hours: {
-        type: String,
+        type: Map,
     },
     reviews: [{ type: Map }],
-    author: {
-        type: String,
-    },
 }, {
     timestamps: true,
 });

@@ -9,7 +9,7 @@ const restaurantController_1 = __importDefault(require("../controllers/restauran
 const auth_1 = __importDefault(require("../middleware/auth"));
 const express_validator_1 = require("express-validator");
 // Crear restaurante
-router.post('/', auth_1.default, [
+router.post('/create', auth_1.default, [
     express_validator_1.check('name', ' El nombre del restaurante es obligatorio')
         .not()
         .isEmpty(),

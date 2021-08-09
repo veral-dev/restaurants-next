@@ -5,48 +5,11 @@ import Router from 'next/router';
 import Alert from '../../components/Alert';
 import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
-import styled from 'styled-components';
 import AppLayout from '../../components/AppLayout';
 
-const UserForm = styled.div`
-    background-color: var(--gray);
-    height: 100vh;
-    min-height: 800px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
+import { UserForm, FormContainer, FieldForm } from '../../components/styles';
 
-const FormContainer = styled.div`
-    padding: 5rem 3rem;
-    max-width: 500px;
-    width: 95%;
-    background-color: var(--white);
-    border-radius: 1rem;
-`;
-
-const FieldForm = styled.div`
-    display: flex;
-    margin-bottom: 2rem;
-    align-items: center;
-    :last-of-type {
-        margin: 0;
-    }
-    label {
-        flex: 0 0 100px;
-        font-family: var(--textFont);
-    }
-    input[type='password'],
-    input[type='text'],
-    input[type='username'] {
-        border: 1px solid #e1e1e1;
-        padding: 1rem;
-        flex: 1;
-        width: 100%;
-    }
-`;
-const Login = () => {
-    //Extraer los valores del context alert
+export default function Login() {
     const alertContext = useContext(AlertContext);
     const { alert, showAlert } = alertContext;
 
@@ -86,6 +49,7 @@ const Login = () => {
         //Validar campos
         if (username.trim() === '' || password.trim() === '') {
             showAlert('Todos los campos son obligatorios', 'error');
+            return;
         }
         //Pasarlo a action
         LogIn({ username, password });
@@ -134,11 +98,9 @@ const Login = () => {
                     <Link href="/signup" className="linkto">
                         ¿No tienes cuenta? Registrate
                     </Link>
-                    <p>Prueba la app usando admin@admin.com | 123456</p>
+                    <p>Prueba la app usando admin | 123456</p>
                 </FormContainer>
             </UserForm>
         </AppLayout>
     );
-};
-
-export default Login;
+}

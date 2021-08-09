@@ -67,16 +67,23 @@ exports.createUser = createUser;
 function addFavorite(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = yield User_model_1.default.findById(req.user.id);
-        if (user.favourites && user.favourites.includes(req.body.id)) {
-            const favourites = user.favourites.filter((elm) => elm !== req.body.id);
-            yield user.updateOne({ favourites: favourites });
+        try {
+            if (user.favourites && user.favourites.includes(req.body.id)) {
+                const favourites = user.favourites.filter((elm) => elm !== req.body.id);
+                yield user.updateOne({ favourites: favourites });
+            }
+            else {
+                const favourites = user.favourites;
+                favourites.push(req.body.id);
+                yield user.updateOne({ favourites });
+            }
+            res.json({ ok: 1 });
         }
-        else {
-            const favourites = user.favourites;
-            favourites.push(req.body.id);
-            yield user.updateOne({ favourites });
+        catch (error) {
+            res.status(500).json({
+                msg: `Hubo un error ${error}`,
+            });
         }
-        res.json({ ok: 1 });
     });
 }
 exports.addFavorite = addFavorite;

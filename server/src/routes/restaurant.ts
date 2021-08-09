@@ -6,7 +6,7 @@ import { check } from 'express-validator';
 
 // Crear restaurante
 router.post(
-    '/',
+    '/create',
     auth,
     [
         check('name', ' El nombre del restaurante es obligatorio')

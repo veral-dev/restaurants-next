@@ -61,16 +61,23 @@ export async function createUser(req: Request, res: Response): Promise<any> {
 // Añadir restaurante favorito
 export async function addFavorite(req: Request, res: Response): Promise<any> {
     const user = await User.findById(req.user.id);
-
-    if (user.favourites && user.favourites.includes(req.body.id)) {
-        const favourites = user.favourites.filter((elm) => elm !== req.body.id);
-        await user.updateOne({ favourites: favourites });
-    } else {
-        const favourites = user.favourites;
-        favourites.push(req.body.id);
-        await user.updateOne({ favourites });
+    try {
+        if (user.favourites && user.favourites.includes(req.body.id)) {
+            const favourites = user.favourites.filter(
+                (elm) => elm !== req.body.id
+            );
+            await user.updateOne({ favourites: favourites });
+        } else {
+            const favourites = user.favourites;
+            favourites.push(req.body.id);
+            await user.updateOne({ favourites });
+        }
+        res.json({ ok: 1 });
+    } catch (error) {
+        res.status(500).json({
+            msg: `Hubo un error ${error}`,
+        });
     }
-    res.json({ ok: 1 });
 }
 
 export default { createUser, addFavorite };

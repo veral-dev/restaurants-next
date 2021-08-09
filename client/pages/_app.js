@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
   --bluedark: #27224f;
   --headingFont:'Raleway', sans-serif;
   --textFont:  'Roboto', sans-serif;
-  --bg: #f4dbb3;
+  --bg: #f3f3f3;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -74,11 +74,6 @@ a{
   }
 }
 
-.logo {
-    height: 1em;
-    margin-left: 0.5rem;
-}
-
 .btn-primary {
   background-color: var(--bluelight);
   color: var(--white);
@@ -86,7 +81,7 @@ a{
 
 .btn-secundary {
   background-color: var(--primary);
-  color: var(--bluedark)
+  color: var(--white)
 }
 .btn-block {
   display: block;
