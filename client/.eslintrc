@@ -1,3 +1,7 @@
+// {
+//     "extends": ["next", "next/core-web-vitals", "next/babel"],
+//     "plugins": []
+// }
 {
-    "extends": ["next", "next/core-web-vitals", "next/babel"]
+    "extends": "next"
 }
