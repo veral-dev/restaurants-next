@@ -74,9 +74,9 @@ const Cards = styled.div`
 
 export default function Home() {
     const authContext = useContext(AuthContext);
-    const { token, user, auth } = authContext;
+    const {  user, auth } = authContext;
     const alertContext = useContext(AlertContext);
-    const { alert, showAlert } = alertContext;
+    const { alert } = alertContext;
 
     const [restaurants, setRestaurants] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -96,11 +96,7 @@ export default function Home() {
     useEffect(() => {
         getRestaurants();
     }, []);
-    useEffect(() => {
-        if (!token) {
-            setRestaurants([]);
-        }
-    }, [token]);
+
     return (
         <div>
             <AppLayout>
@@ -112,7 +108,7 @@ export default function Home() {
                     {loading && <Spinner />}
 
                     <Cards>
-                        {restaurants.length === 0 ? (
+                        {restaurants.length === 0 && !loading ? (
                             <p>No hay restaurantes</p>
                         ) : (
                             restaurants.map((restaurant) => (
