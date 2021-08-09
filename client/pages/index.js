@@ -87,7 +87,7 @@ export default function Home() {
             const resp = await clientAxios.get('/api/restaurants');
             setRestaurants(resp.data);
         } catch (error) {
-            showAlert(error, 'error');
+            console.log(error, 'error');
         } finally {
             setLoading(false);
         }
