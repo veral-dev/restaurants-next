@@ -9,8 +9,8 @@ import AlertContext from '../../context/alert/alertContext';
 
 const FavImg = styled.div`
     position: absolute;
-    right: 5rem;
-    top: 5rem;
+    right: 3rem;
+    top: 3rem;
     cursor: pointer;
     z-index: 999;
 `;

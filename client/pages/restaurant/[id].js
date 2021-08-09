@@ -14,21 +14,18 @@ import AuthContext from '../../context/auth/authContext';
 
 const RestDiv = styled.div`
     padding: 2rem 2rem;
-
     width: 100%;
-    position: relative;
     @media screen and (min-width: 600px) {
         display: flex;
     }
 `;
 
 const RestCol = styled.div`
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 2rem;
-
+    position: relative;
     width: 100%;
 
     img {

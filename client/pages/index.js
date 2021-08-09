@@ -18,7 +18,7 @@ const CardContainer = styled.div`
     border-radius: 20px 0px;
     background-color: var(--white);
     padding: 2rem;
-
+    position: relative;
     img {
         margin-bottom: 1rem;
         border-radius: 2rem;
@@ -43,7 +43,6 @@ const CardDiv = styled.div`
     padding: 2rem 2rem;
 
     width: 100%;
-    position: relative;
 
     @media screen and (min-width: 1200px) {
         flex: 0 0 25%;
@@ -74,7 +73,7 @@ const Cards = styled.div`
 
 export default function Home() {
     const authContext = useContext(AuthContext);
-    const {  user, auth } = authContext;
+    const { user, auth } = authContext;
     const alertContext = useContext(AlertContext);
     const { alert } = alertContext;
 
@@ -126,7 +125,8 @@ export default function Home() {
                                             id={restaurant._id}
                                         />
                                         <Link
-                                            href={`restaurant/${restaurant._id}`} passHref
+                                            href={`restaurant/${restaurant._id}`}
+                                            passHref
                                         >
                                             <a>
                                                 <Image
