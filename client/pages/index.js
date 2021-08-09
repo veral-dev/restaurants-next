@@ -15,8 +15,6 @@ const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    -webkit-box-pack: center;
-    justify-content: center;
     border-radius: 20px 0px;
     background-color: var(--white);
     padding: 2rem;
@@ -36,6 +34,8 @@ const CardContainer = styled.div`
     p {
         font-size: 2rem;
         cursor: pointer;
+        min-height: 100px;
+        margin-bottom: 0;
     }
 `;
 
