@@ -2,11 +2,13 @@ import styled from 'styled-components';
 
 export const UserForm = styled.div`
     background-color: var(--gray);
-    height: 91vh;
-    min-height: 800px;
+    min-height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
+    @media screen and (min-width: 600px) {
+        min-height: 800px;
+    }
 `;
 
 export const FormContainer = styled.div`

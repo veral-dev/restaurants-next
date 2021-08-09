@@ -35,10 +35,10 @@ export default function Home({ fav, id }) {
         <FavImg>
             <Image
                 src={fav ? '/favorite.svg' : '/favorite_border.svg'}
-                width={35}
-                height={35}
+                width={40}
+                height={40}
                 onClick={() => updateUser(id)}
-                alt='heart'
+                alt="heart"
             />
         </FavImg>
     );

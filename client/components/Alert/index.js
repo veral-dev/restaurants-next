@@ -11,6 +11,7 @@ const AlertCard = styled.div`
     font-size: 2.2rem;
     text-align: center;
     width: 100%;
+    z-index: 999;
     p{
       padding: 1rem;
     }

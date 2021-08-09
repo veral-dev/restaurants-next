@@ -23,6 +23,7 @@ const RestDiv = styled.div`
 `;
 
 const RestCol = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -87,7 +88,7 @@ export default function RestaurantDetails() {
                 <div className="container">
                     <button
                         onClick={() => Router.back()}
-                        style={{ float: 'right' }}
+                        style={{ float: 'right', marginRight: '2rem' }}
                         className="btn btn-secundary"
                     >
                         Atrás
