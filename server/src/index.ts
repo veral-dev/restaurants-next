@@ -27,6 +27,6 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/restaurants', require('./routes/restaurant'));
 
 //Arrancar la app
-app.listen(port, () =>
+app.listen(port, '0.0.0.0', () => {
     console.log(`El servidor esta funcionando en el puerto ${port}`)
-);
+});
