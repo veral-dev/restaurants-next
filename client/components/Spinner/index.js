@@ -79,7 +79,7 @@ const SpinnerStyle = styled.div`
     }
 `;
 
-const Spinner = () => {
+export default function Spinner () {
     return (
         <SpinnerStyle>
             <div className="sk-cube-grid">
@@ -97,4 +97,3 @@ const Spinner = () => {
     );
 };
 
-export default Spinner;
