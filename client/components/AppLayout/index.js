@@ -65,6 +65,11 @@ export default function AppLayout({ children }) {
         if (token) userAuth();
         else setIsLoggedIn(null);
     }, [token]);
+
+    async function loggingOut() {
+        await LogOut();
+        Router.push('/');
+    }
     return (
         <>
             <Head>
@@ -92,7 +97,7 @@ export default function AppLayout({ children }) {
                         <>
                             <button
                                 className="btn btn-primary cerrar-sesion"
-                                onClick={() => LogOut()}
+                                onClick={() => loggingOut()}
                             >
                                 Cerrar Sesión
                             </button>

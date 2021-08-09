@@ -13,7 +13,7 @@ import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
 
 const RestDiv = styled.div`
-    padding: 2rem 2rem;
+    padding: 0rem 2rem;
     width: 100%;
     @media screen and (min-width: 600px) {
         display: flex;
@@ -26,7 +26,6 @@ const RestCol = styled.div`
     align-items: flex-start;
     padding: 2rem;
     position: relative;
-    width: 100%;
 
     img {
         margin-bottom: 1rem;
@@ -85,13 +84,13 @@ export default function RestaurantDetails() {
                 <div className="container">
                     <button
                         onClick={() => Router.back()}
-                        style={{ float: 'right', marginRight: '2rem' }}
+                        style={{ marginLeft: '3rem' }}
                         className="btn btn-secundary"
                     >
                         Atrás
                     </button>
                     {loading && <Spinner />}
-                    {restaurant && (
+                    {restaurant && !loading && (
                         <RestDiv>
                             <RestCol>
                                 <Favorite
@@ -189,7 +188,7 @@ export default function RestaurantDetails() {
                             </RestCol>
                         </RestDiv>
                     )}
-                    {auth && (
+                    {auth && !loading && (
                         <button
                             className="btn btn-secundary"
                             style={{ marginLeft: '4rem ' }}
