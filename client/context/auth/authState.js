@@ -14,7 +14,7 @@ import {
     CLOSE_SESSION,
 } from '../types';
 
-export default function AuthState(props) {
+ const AuthState = (props) => {
     let tokenFromStorage = '';
     if (typeof window !== 'undefined') {
         tokenFromStorage = localStorage.getItem('token');
@@ -120,3 +120,4 @@ export default function AuthState(props) {
         </AuthContext.Provider>
     );
 };
+export default AuthState

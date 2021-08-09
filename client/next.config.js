@@ -7,7 +7,6 @@ module.exports = {
             'media-cdn.tripadvisor.com',
         ],
     },
-    distDir: 'build',
     eslint: {
     ignoreDuringBuilds: true,
   },

@@ -4,7 +4,7 @@ import alertReducer from './alertReducer';
 
 import { SHOW_ALERT, HIDE_ALERT } from '../types';
 
-export default function AlertState(props) {
+ const AlertState = (props) => {
     const initialState = {
         alert: null,
     };
@@ -40,3 +40,4 @@ export default function AlertState(props) {
     );
 };
 
+export default AlertState
