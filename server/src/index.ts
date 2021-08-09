@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //Puerto de la app
-const port = 5000;
+const port: any = process.env.PORT || 5000;
 app.get('/', (_, res) => {
     res.status(200).send();
 });
@@ -28,5 +28,5 @@ app.use('/api/restaurants', require('./routes/restaurant'));
 
 //Arrancar la app
 app.listen(port, '0.0.0.0', () => {
-    console.log(`El servidor esta funcionando en el puerto 5000`)
+    console.log(`El servidor esta funcionando en el puerto ${port}`)
 });
