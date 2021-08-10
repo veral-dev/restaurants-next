@@ -103,7 +103,7 @@ export default function RestaurantDetails() {
                                     id={restaurant._id}
                                 />
                                 <Image
-                                    src={restaurant.image || ''}
+                                    src={restaurant.image || '/restaurant.jpeg'}
                                     alt={restaurant.name}
                                     width={500}
                                     height={500}

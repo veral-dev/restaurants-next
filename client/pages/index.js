@@ -130,7 +130,10 @@ export default function Home() {
                                         >
                                             <a>
                                                 <Image
-                                                    src={restaurant.image}
+                                                    src={
+                                                        restaurant.image ||
+                                                        '/restaurant.jpeg'
+                                                    }
                                                     alt={restaurant.name}
                                                     width={500}
                                                     height={500}
