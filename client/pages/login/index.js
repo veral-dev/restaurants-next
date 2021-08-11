@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
+
 import Link from 'next/link';
 import Router from 'next/router';
 
-import Alert from '../../components/Alert';
 import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
+import Alert from '../../components/Alert';
 import AppLayout from '../../components/AppLayout';
-
 import { UserForm, FormContainer, FieldForm } from '../../components/styles';
 
 export default function Login() {

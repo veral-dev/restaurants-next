@@ -1,11 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
+
 import Link from 'next/link';
 import Router from 'next/router';
+
 import Alert from '../../components/Alert';
 import AppLayout from '../../components/AppLayout';
 import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth/authContext';
-
 import { UserForm, FormContainer, FieldForm } from '../../components/styles';
 
 export default function SignUp(props) {

@@ -1,15 +1,16 @@
 import { useState, useEffect, useContext } from 'react';
+
 import Image from 'next/image';
+import Link from 'next/link';
+import styled from 'styled-components';
+import clientAxios from '../config/axios';
+
 import Alert from '../components/Alert';
 import AppLayout from '../components/AppLayout';
 import Spinner from '../components/Spinner';
 import Favorite from '../components/Favorite';
-
-import clientAxios from '../config/axios';
 import AlertContext from '../context/alert/alertContext';
 import AuthContext from '../context/auth/authContext';
-import Link from 'next/link';
-import styled from 'styled-components';
 
 const CardContainer = styled.div`
     display: flex;

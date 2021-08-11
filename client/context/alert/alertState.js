@@ -1,15 +1,15 @@
 import React, { useReducer } from 'react';
 import AlertContext from './alertContext';
-import alertReducer from './alertReducer';
+import AlertReducer from './alertReducer';
 
 import { SHOW_ALERT, HIDE_ALERT } from '../types';
 
- const AlertState = (props) => {
+const AlertState = (props) => {
     const initialState = {
         alert: null,
     };
 
-    const [state, dispatch] = useReducer(alertReducer, initialState);
+    const [state, dispatch] = useReducer(AlertReducer, initialState);
 
     //Funciones
     const showAlert = (msg, category) => {
@@ -40,4 +40,4 @@ import { SHOW_ALERT, HIDE_ALERT } from '../types';
     );
 };
 
-export default AlertState
+export default AlertState;

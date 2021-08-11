@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 const SpinnerStyle = styled.div`
     .sk-cube-grid {
         width: 60px;
@@ -79,7 +80,7 @@ const SpinnerStyle = styled.div`
     }
 `;
 
-export default function Spinner () {
+export default function Spinner() {
     return (
         <SpinnerStyle>
             <div className="sk-cube-grid">
@@ -95,5 +96,4 @@ export default function Spinner () {
             </div>
         </SpinnerStyle>
     );
-};
-
+}

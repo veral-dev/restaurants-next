@@ -1,11 +1,13 @@
 import { useState, useContext } from 'react';
+
 import Router from 'next/router';
+import clientAxios from '../../config/axios';
+import styled from 'styled-components';
+
 import Alert from '../../components/Alert';
 import AlertContext from '../../context/alert/alertContext';
 import AppLayout from '../../components/AppLayout';
-import { UserForm, FormContainer, FieldForm } from '../../components/styles';
-import styled from 'styled-components';
-import clientAxios from '../../config/axios';
+import { FormContainer, FieldForm } from '../../components/styles';
 
 const Hours = styled.div`
     padding: 2rem;
@@ -238,7 +240,9 @@ export default function NewRestaurant() {
                         </Hours>
                         <ul>
                             {operating_hours.length > 0 &&
-                                operating_hours.map((hour) => <li key={hour}>{hour}</li>)}
+                                operating_hours.map((hour) => (
+                                    <li key={hour}>{hour}</li>
+                                ))}
                         </ul>
                         <FieldForm>
                             <button

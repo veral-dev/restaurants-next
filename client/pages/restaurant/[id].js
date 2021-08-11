@@ -1,16 +1,16 @@
 import { useState, useEffect, useContext } from 'react';
-import styled from 'styled-components';
+
 import Router from 'next/router';
 import Image from 'next/image';
+import clientAxios from '../../config/axios';
+import styled from 'styled-components';
 
+import Alert from '../../components/Alert';
+import AuthContext from '../../context/auth/authContext';
+import AlertContext from '../../context/alert/alertContext';
 import AppLayout from '../../components/AppLayout';
 import Spinner from '../../components/Spinner';
 import Favorite from '../../components/Favorite';
-
-import clientAxios from '../../config/axios';
-import Alert from '../../components/Alert';
-import AlertContext from '../../context/alert/alertContext';
-import AuthContext from '../../context/auth/authContext';
 
 const RestDiv = styled.div`
     padding: 0rem 2rem;

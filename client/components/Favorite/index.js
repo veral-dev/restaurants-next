@@ -1,10 +1,10 @@
+import { useContext } from 'react';
 import Image from 'next/image';
 import Router from 'next/router';
-import { useContext } from 'react';
-import styled from 'styled-components';
 import clientAxios from '../../config/axios';
+import styled from 'styled-components';
+
 import AuthContext from '../../context/auth/authContext';
-import Alert from '../../components/Alert';
 import AlertContext from '../../context/alert/alertContext';
 
 const FavImg = styled.div`

@@ -1,10 +1,11 @@
+import React, { useContext, useEffect, useState } from 'react';
+
 import Head from 'next/head';
 import Image from 'next/image';
-
-import React, { useContext, useEffect, useState } from 'react';
-import AuthContext from '../../context/auth/authContext';
-import styled from 'styled-components';
 import Router from 'next/router';
+import styled from 'styled-components';
+
+import AuthContext from '../../context/auth/authContext';
 
 const Nav = styled.nav`
     background-color: var(--primary);
