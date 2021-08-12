@@ -27,6 +27,10 @@ const RestCol = styled.div`
     padding: 2rem;
     position: relative;
 
+    h1 {
+        overflow-wrap: anywhere;
+    }
+
     img {
         margin-bottom: 1rem;
         border-radius: 2rem;

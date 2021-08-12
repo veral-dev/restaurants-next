@@ -37,6 +37,7 @@ const CardContainer = styled.div`
         cursor: pointer;
         min-height: 100px;
         margin-bottom: 0;
+        overflow-wrap: anywhere;
     }
 `;
 
